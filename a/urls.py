@@ -8,5 +8,6 @@ urlpatterns = [
     path('file_manager/', views.file_manager, name='file_manager'),
     path('base_input/', views.base_input, name='base_input'),
 
+    path('project_list/', views.ProjectList.as_view(), name='project_list'),
     path('project_update/<int:pk>/', views.project_update, name='project_update'),
 ]

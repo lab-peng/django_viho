@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.http import JsonResponse
 from .models import Project, ProjectFile
 from .forms import ProjectFileForm
+from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.template.defaultfilters import filesizeformat
 
@@ -24,6 +25,11 @@ def bootstrap_border_table(request):
 
 def base_input(request):
     return render(request, 'base-input.html')
+
+class ProjectList(ListView):
+    model = Project
+    
+
 
 def project_update(request, pk):
     project = Project.objects.get(pk=pk)
