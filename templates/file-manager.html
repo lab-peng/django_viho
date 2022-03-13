@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/dropzone.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'custom/css/style.css' %}">
+{% endblock %}
+
+
+{% block content %}
+  <div class="container-fluid">
+    <div class="page-header">
+      <div class="row">
+        <div class="col-sm-6">
+          <h3>File Manager</h3>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item">Apps                                     </li>
+            <li class="breadcrumb-item active">File Manager</li>
+          </ol>
+        </div>
+        <div class="col-sm-6">
+          <!-- Bookmark Start-->
+          <div class="bookmark">
+            <ul>
+              <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Tables"><i data-feather="inbox"></i></a></li>
+              <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Chat"><i data-feather="message-square"></i></a></li>
+              <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Icons"><i data-feather="command"></i></a></li>
+              <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Learning"><i data-feather="layers"></i></a></li>
+              <li><a href="javascript:void(0)"><i class="bookmark-search" data-feather="star"></i></a>
+                <form class="form-inline search-form">
+                  <div class="form-group form-control-search">
+                    <input type="text" placeholder="Search..">
+                  </div>
+                </form>
+              </li>
+            </ul>
+          </div>
+          <!-- Bookmark Ends-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Container-fluid starts-->
+  <div class="container-fluid">
+    <div class="row">
+      {% comment %} <div class="col-xl-3 box-col-6 pe-0">
+        <div class="job-sidebar"><a class="btn btn-primary job-toggle" href="javascript:void(0)">file filter</a>
+          <div class="job-left-aside custom-scrollbar">
+            <div class="file-sidebar">
+              <div class="card">
+                <div class="card-body">
+                  <ul>
+                    <li>    
+                      <div class="btn btn-primary"><i data-feather="home">                                    </i>Home </div>
+                    </li>
+                    <li>
+                      <div class="btn btn-light"><i data-feather="folder"></i>All    </div>
+                    </li>
+                    <li>
+                      <div class="btn btn-light"><i data-feather="clock"></i>Recent    </div>
+                    </li>
+                    <li>
+                      <div class="btn btn-light"><i data-feather="star"></i>Starred      </div>
+                    </li>
+                    <li>
+                      <div class="btn btn-light"><i data-feather="alert-circle"></i>Recovery        </div>
+                    </li>
+                    <li>
+                      <div class="btn btn-light"><i data-feather="trash-2"></i>Deleted </div>
+                    </li>
+                  </ul>
+                  <hr>
+                  <ul>
+                    <li>
+                      <div class="btn btn-outline-primary"><i data-feather="database">   </i>Storage   </div>
+                      <div class="m-t-15">
+                        <div class="progress sm-progress-bar mb-1">
+                          <div class="progress-bar bg-primary" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <h6>25 GB of 100 GB used</h6>
+                      </div>
+                    </li>
+                  </ul>
+                  <hr>
+                  <ul>
+                    <li>
+                      <div class="btn btn-outline-primary"><i data-feather="grid">   </i>Pricing plan</div>
+                    </li>
+                    <li> 
+                      <div class="pricing-plan">
+                        <h6>Trial Version </h6>
+                        <h5>FREE</h5>
+                        <p> 100 GB Space</p>
+                        <div class="btn btn-outline-primary btn-xs">Selected</div><img class="bg-img" src="{% static 'assets/images/dashboard/folder.png" alt="">
+                      </div>
+                    </li>
+                    <li> 
+                      <div class="pricing-plan">
+                        <h6>Premium</h6>
+                        <h5>$5/month</h5>
+                        <p> 200 GB Space</p>
+                        <div class="btn btn-outline-primary btn-xs">Contact Us</div><img class="bg-img" src="{% static 'assets/images/dashboard/folder1.png" alt="">
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> {% endcomment %}
+      {% comment %} <div class="col-xl-4 col-md-4 box-col-12">
+        <div class="card">
+          <div class="card-header pb-0">
+            <h5>Multi File Upload</h5>
+          </div>
+          <div class="card-body">
+            <form class="dropzone dropzone-primary" id="multiFileUpload" action="/upload.php">
+              <div class="dz-message needsclick"><i class="icon-cloud-up"></i>
+                <h6>Drop files here or click to upload.</h6><span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div> {% endcomment %}
+      <div class="col-xl-12 col-md-8 box-col-12">
+        <div class="file-content">
+          <div class="card">
+            <div class="card-body file-manager">
+              <h5 class="mt-4"></h5>
+              <ul class="files">
+                <li class="file-box">
+                  <div class="file-top">  <i class="fa fa-file-archive-o txt-secondary"></i><i class="fa fa-ellipsis-v f-14 ellips"></i></div>
+                  <div class="file-bottom">
+                    <h6>Project.zip </h6>
+                    <p class="mb-1">1.90 GB</p>
+                    <p> <b>last open : </b>1 hour ago</p>
+                  </div>
+                </li>
+                <li class="file-box">
+                  <div class="file-top">  <i class="fa fa-file-excel-o txt-success"></i><i class="fa fa-ellipsis-v f-14 ellips"></i></div>
+                  <div class="file-bottom">
+                    <h6>Backend.xls</h6>
+                    <p class="mb-1">2.00 GB</p>
+                    <p> <b>last open : </b>1 hour ago</p>
+                  </div>
+                </li>
+                <li class="file-box">
+                  <div class="file-top">  <i class="fa fa-file-text-o txt-info"></i><i class="fa fa-ellipsis-v f-14 ellips"></i></div>
+                  <div class="file-bottom">
+                    <h6>requirements.txt </h6>
+                    <p class="mb-1">0.90 KB</p>
+                    <p> <b>last open : </b>1 hour ago</p>
+                  </div>
+                </li>
+                <li class="file-box">
+                  <div class="file-top">  <i class="fa fa-file-text-o txt-primary"></i><i class="fa fa-ellipsis-v f-14 ellips"></i></div>
+                  <div class="file-bottom">
+                    <h6>Logo.psd </h6>
+                    <p class="mb-1">2.0 MB</p>
+                    <p> <b>last open : </b>1 hour ago</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block js %}        
+<script src="{% static 'assets/js/dropzone/dropzone.js' %}"></script>
+<script src="{% static 'assets/js/dropzone/dropzone-script.js' %}"></script>
+{% endblock %}

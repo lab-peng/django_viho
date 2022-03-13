@@ -1,0 +1,217 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/dropzone.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'custom/css/style.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<div class="container-fluid">
+    <div class="page-header">
+    <div class="row">
+        <div class="col-sm-6">
+        <h3>{{ project.name }}</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item">Apps                                     </li>
+            <li class="breadcrumb-item active">{{ project.name }}</li>
+        </ol>
+        </div>
+        <div class="col-sm-6">
+        <!-- Bookmark Start-->
+        <div class="bookmark">
+            <ul>
+            <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Tables"><i data-feather="inbox"></i></a></li>
+            <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Chat"><i data-feather="message-square"></i></a></li>
+            <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Icons"><i data-feather="command"></i></a></li>
+            <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Learning"><i data-feather="layers"></i></a></li>
+            <li><a href="javascript:void(0)"><i class="bookmark-search" data-feather="star"></i></a>
+                <form class="form-inline search-form">
+                <div class="form-group form-control-search">
+                    <input type="text" placeholder="Search..">
+                </div>
+                </form>
+            </li>
+            </ul>
+        </div>
+        <!-- Bookmark Ends-->
+        </div>
+    </div>
+    </div>
+</div>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+        <div class="card-body">
+            <div class="form theme-form">
+            <div class="row">
+                <div class="col-sm-6">
+                <div class="mb-3">
+                    <label>Project Code</label>
+                    <input class="form-control" type="text" placeholder="Project name *">
+                </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="mb-3">
+                        <label>Project Name</label>
+                        <input class="form-control" type="text" placeholder="Project name *">
+                    </div>
+                    </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                <div class="mb-3">
+                    <label>Upload project file</label>
+                    <form class="dropzone" action="/project_update/{{ project.pk }}/" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                    <div class="dz-message needsclick js-upload-photos">
+                        <i class="icon-cloud-up"></i>
+                        <h6>Drop files here or click to upload.</h6>
+                    </div>
+                    <input id="fileupload" type="file" name="file" multiple
+                        style="display: none;"
+                        data-url="/project_update/{{ project.pk }}/"
+                        data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
+                    </form>
+                </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="file-content">
+                  <div class="card">
+                    <div class="card-body file-manager">
+                      <h5 class="mt-4"></h5>
+                      <ul class="files" id="project-file-list">
+                        {% for file in project.projectfile_set.all %}
+                        <li class="file-box mt-2">
+                          <div class="file-top">  
+                            <a target="_blank" href="{{ file.file.url }}"><i class="fa fa-cloud-download f-18 left-ellips"></i></a>
+                            <i class="fa fa-file-text-o txt-secondary"></i>
+                            <i class="fa fa-times f-18 ellips" style="color: #24695c; cursor: pointer"></i>
+                        </div>
+                          <div class="file-bottom">
+                            <h6>{{ file.filename }} </h6>
+                            <p class="mb-1">{{ file.file.size|filesizeformat }}</p>
+                          </div>
+                        </li>
+                        {% endfor %}
+                        {% comment %} <li class="file-box">
+                          <div class="file-top">  <i class="fa fa-file-excel-o txt-success"></i><i class="fa fa-ellipsis-v f-14 ellips"></i></div>
+                          <div class="file-bottom">
+                            <h6>Backend.xls</h6>
+                            <p class="mb-1">2.00 GB</p>
+                          </div>
+                        </li>
+                        <li class="file-box">
+                          <div class="file-top">  <i class="fa fa-file-text-o txt-info"></i><i class="fa fa-ellipsis-v f-14 ellips"></i></div>
+                          <div class="file-bottom">
+                            <h6>requirements.txt </h6>
+                            <p class="mb-1">0.90 KB</p>
+                          </div>
+                        </li>
+                        <li class="file-box">
+                          <div class="file-top">  <i class="fa fa-file-text-o txt-primary"></i><i class="fa fa-ellipsis-v f-14 ellips"></i></div>
+                          <div class="file-bottom">
+                            <h6>Logo.psd </h6>
+                            <p class="mb-1">2.0 MB</p>
+                          </div>
+                        </li> {% endcomment %}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <div class="row">
+                <form method="post">
+                    {% csrf_token %}
+                <div class="col">
+                <div class="text-end">
+                    <button type="submit" class="btn btn-secondary me-3">Confirm</button>
+                    <a class="btn btn-danger" href="{% url 'bootstrap_border_table' %}">Cancel</a>
+                </div>
+                </div>
+                </form>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-progress" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+          <div class="progress">
+            <div class="progress-bar bg-success" role="progressbar" style="width: 0%;">0%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block js %}        
+{% comment %} <script src="{% static 'assets/js/dropzone/dropzone.js' %}"></script> {% endcomment %}
+{% comment %} <script src="{% static 'assets/js/dropzone/dropzone-script.js' %}"></script> {% endcomment %}
+
+{# JQUERY FILE UPLOAD SCRIPTS #}
+<script src="{% static 'custom/js/ajax_multiple_files_upload/jquery.ui.widget.js' %}"></script>
+<script src="{% static 'custom/js/ajax_multiple_files_upload/jquery.iframe-transport.js' %}"></script>
+<script src="{% static 'custom/js/ajax_multiple_files_upload/jquery.fileupload.js' %}"></script>
+
+<script>
+    $(function () {
+        /* 1. OPEN THE FILE EXPLORER WINDOW */
+        $(".js-upload-photos").click(function () {
+          $("#fileupload").click();
+        });
+      
+        /* 2. INITIALIZE THE FILE UPLOAD COMPONENT */
+        $("#fileupload").fileupload({
+          dataType: 'json',
+          sequentialUploads: true,  /* 1. SEND THE FILES ONE BY ONE */
+          start: function (e) {  /* 2. WHEN THE UPLOADING PROCESS STARTS, SHOW THE MODAL */
+            $("#modal-progress").modal("show");
+          },
+          stop: function (e) {  /* 3. WHEN THE UPLOADING PROCESS FINALIZE, HIDE THE MODAL */
+            $("#modal-progress").modal("hide");
+          },
+          progressall: function (e, data) {  /* 4. UPDATE THE PROGRESS BAR */
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            var strProgress = progress + "%";
+            $(".progress-bar").css({"width": strProgress});
+            $(".progress-bar").text(strProgress);
+          },
+          done: function (e, data) {  /* 3. PROCESS THE RESPONSE FROM THE SERVER */
+            if (data.result.is_valid) {
+                console.log(data.result.name);
+              $("#project-file-list").prepend(
+                `<li class="file-box mt-2" style="margin-right: 4px;">
+                    <div class="file-top">
+                        <a target="_blank" href="${data.result.url}"><i class="fa fa-cloud-download f-18 left-ellips"></i></a>
+                        <i class="fa fa-file-text-o txt-secondary"></i>
+                        <i class="fa fa-times f-18 ellips" style="color: #24695c; cursor: pointer"></i>
+                    </div>    
+                    <div class="file-bottom">
+                      <h6>${data.result.name}</h6>
+                      <p class="mb-1">${data.result.size}</p>
+                    </div>
+                  </li>`
+              )
+            }
+          }
+        });
+      
+      });
+</script>
+
+{% endblock %}
